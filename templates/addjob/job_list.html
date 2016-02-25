@@ -1,0 +1,69 @@
+{% extends 'addjob/base.html' %}
+
+{% load tags_extras %}
+
+{% block base %}
+<div class="slider-area">
+<div class="slider-area">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#wszystkie">Wszystkie</a></li>
+            {% for letter in list|first_letter %}
+                <li><a data-toggle="tab" href="#{{ letter }}">{{ letter }}</a></li>
+            {% endfor %}
+        </ul>
+
+        <div class="tab-content">
+            <div id="wszystkie" class="tab-pane fade in active">
+
+                {% if list %}
+                    {% for column in list|rows:4  %}
+
+                        <div class="content-area col-lg-3    col-md-5">
+                            <div class="content-area">
+                                <div class="list-group">
+
+                                    {% for job in column %}
+                                        <a class="list-group-item " href="{% url 'job_details' job.slug %}">{{ job }}<span class="badge">{{ job|items_inside }}</span></a>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            {% for letter in list|first_letter %}
+                <div id="{{ letter }}" class="tab-pane fade">
+                    {% for job in list %}
+                        {% if letter == job|first_letter %}
+
+                            <a class="list-group-item " href="{% url 'job_details' job.slug  %}">{{ job }}
+                                <span class="badge">{{ job|items_inside }}</span></a>
+                        {% endif %}
+
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div><!-- /.tab-content -->
+
+    </div>
+
+
+        {% for job in list  %}
+            <div class="content-area container">
+                <a href="{% url 'job_details' job.slug %}"><h2>
+                    {{ job|upper }}</h2>
+                </a>
+                <p>
+
+                    branża: <a href="{% url 'job_in_branza' job.branza.slug %}">{{ job.branza }}</a>;
+                    sektor: <a href="{% url 'job_in_branza' job.branza.slug %}">{{ job.sektor }}</a>
+                </p>
+                <p>tags: {{ job.tags.all|join:", " }}</p>
+            <hr>
+            </div>
+        {% endfor %}
+
+</div>
+{% endblock %}

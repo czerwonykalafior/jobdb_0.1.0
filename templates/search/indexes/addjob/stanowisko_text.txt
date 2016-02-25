@@ -1,0 +1,7 @@
+{{ object.pl_job }}
+{{ object.eng_job }}
+{{ object.branza }}
+{{ object.sektor }}
+{{ object.tags }}
+{{ object.opis }}
+{{ object.dzien }}

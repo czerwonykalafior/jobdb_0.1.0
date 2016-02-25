@@ -1,0 +1,9 @@
+.my-container img {
+
+    opacity: 0.9;
+}
+
+.btn-secondary {
+    background: #0099cc;
+    color: #ffffff;
+}

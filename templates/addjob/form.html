@@ -1,0 +1,49 @@
+{% extends 'addjob/base.html' %}
+
+{% block base %}
+    <div class="container slider-area">
+        <div class="header-connect text-center"><h1>Dodaj swój zawód!</h1></div>
+            <form class="form-horizontal wow fadeInUp" data-wow-delay="0.8s" method="post">{% csrf_token %}
+                <fieldset>
+                    <div class="col-lg-4 text-center">
+                        {% for field in form %}
+                            {% if field == form.opis %}
+                                </div>
+                                <div class=" col-lg-4 text-center">
+                        {% endif %}
+                        {% if field == form.dzien %}
+                                        </div>
+                                <div class=" col-lg-4 text-center">
+                        {% endif %}
+                        {% if field.errors %}
+                            <div class="control-group error">
+                                <label class="control-label">{{ field.label }}</label>
+                                <div class="controls">{{ field }}
+                        <span class="help-inline">
+                            {% for error in  field.errors %}{{ error }}{% endfor %}
+                        </span>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="control-group">
+                                <label class="control-label">{{ field.label }}</label>
+                                <div class="controls">{{ field }}
+                                    {% if field.help_text %}
+                                        <p class="help-inline"><small>{{ field.help_text }}</small></p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                    {% endfor %}
+                </div>
+                </fieldset>
+
+        <div class="form-actions text-center ">
+            <button type="submit" class="btn btn-primary btn-lg" >Dodaj</button>
+        </div>
+        </form>
+    </div>
+
+    </div>
+{% endblock %}

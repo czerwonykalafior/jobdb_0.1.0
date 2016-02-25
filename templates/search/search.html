@@ -1,0 +1,36 @@
+{% extends 'addjob/base.html' %}
+
+{% block base %}
+    <div class="containter slider-area">
+        <div class="col-md-offset-1">
+            <h2>Wyniki wyszukiwania: </h2>
+
+            {% if query %}
+
+                {% for result in page.object_list %}
+                    <ul>
+                    <li>
+                    <blockquote>
+                        <p><a href="{% url 'job_details' result.object.slug %}">{{ result.object.pl_job }}</a></p>
+                        <footer>{{ result.object.opis }}</footer>
+                    </blockquote>
+                    </li>
+                    </ul>
+                {% empty %}
+                    <p>Nie znaleziono wyników.</p>
+
+                {% endfor %}
+
+                {% if page.has_previous or page.has_next %}
+                    <div>
+                        {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                        |
+                        {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                    </div>
+                {% endif %}
+            {% else %}
+                {# Show some example queries to run, maybe query syntax, something else? #}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

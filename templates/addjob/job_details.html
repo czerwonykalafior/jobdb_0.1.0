@@ -1,0 +1,18 @@
+{% extends 'addjob/base.html' %}
+
+{% block base %}
+<div class="slider-area">
+    <div class="container">
+
+        <h2>{{ job.pl_job|upper }} / {{ job.eng_job|capfirst }}</h2>
+        <p>{{ job.opis }}</p>
+        <p><i>"...{{ job.dzien }}..."</i></p>
+        <p>
+            branża: <a href="{% url 'job_in_branza' job.branza.slug  %}">{{ job.branza }}</a>
+            sektor: <a href="{% url 'job_in_branza' job.sektor.slug  %}">{{ job.sektor }}</a>
+        </p>
+        <p>tags: {{ job.tags.all|join:", " }}</p>
+    </div>
+    </div>
+
+{% endblock %}

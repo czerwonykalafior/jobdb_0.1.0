@@ -1,0 +1,49 @@
+<!doctype html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Autocomplete - Multiple, remote</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <style>
+  .ui-autocomplete-loading {
+    background: white url("{% static 'img/ui-anim_basic_16x16.gif' %}") right center no-repeat;
+  }
+  </style>
+
+</head>
+<body>
+
+
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="ui-widget">
+        <p><label for="pl_job">Stanowisko pol: </label>
+            <input name="pl_job" id="pl_job" >
+        </p>
+        <p>
+            <label for="eng_job">Stanowisko eng: </label>
+            <input name="eng_job" id="eng_job" >
+        </p>
+        <label for="branza">Branża:  </label>
+        <input name="branza" id="branza" >
+        {#    <p>   {{ form.branza }}</p>#}
+        <p>     {{ form.opis }}</p>
+        <p>     {{ form.tags }}</p>
+
+        <input type="submit" value="Submit" />
+    </div>
+</form>
+<div>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+
+    <script src="{% static 'js/bower_components/jquery/dist/jquery.js' %}"></script>
+    <script src="{% static 'js/bower_components/jquery-ui/jquery-ui.js' %}"></script>
+    <script src="{% static 'js/autocomplete.js' %}"></script>
+</body>
+</html>
