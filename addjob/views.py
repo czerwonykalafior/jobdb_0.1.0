@@ -7,7 +7,7 @@ from django.shortcuts import render
 import simplejson as json
 from haystack.query import SearchQuerySet
 
-from addjob.models import Stanowisko, Branza, Tags
+from .models import Stanowisko, Branza, Tags
 from forms import StanowiskoForm
 
 

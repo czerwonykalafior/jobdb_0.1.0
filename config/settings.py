@@ -57,7 +57,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'jobdb.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {

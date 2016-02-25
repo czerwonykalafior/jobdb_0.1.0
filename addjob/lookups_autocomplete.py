@@ -1,6 +1,6 @@
 from dal import autocomplete
 
-from addjob.models import Tags, Branza, PlJob, EngJob
+from .models import Tags, Branza, PlJob, EngJob
 
 
 class PlJobAutocomplete(autocomplete.Select2QuerySetView):

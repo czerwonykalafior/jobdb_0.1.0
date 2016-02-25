@@ -1,6 +1,6 @@
 import datetime
 from haystack import indexes
-from addjob.models import Stanowisko
+from .models import Stanowisko
 
 
 class StanowiskoIndex(indexes.SearchIndex, indexes.Indexable):

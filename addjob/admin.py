@@ -1,7 +1,7 @@
 # coding=utf-8
-from models import Stanowisko, Branza, Tags, PlJob, EngJob
 from django.contrib import admin
 
+from .models import Stanowisko, Branza, Tags, PlJob, EngJob
 
 
 class StanowiskoAdmin(admin.ModelAdmin):

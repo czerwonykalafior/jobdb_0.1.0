@@ -1,16 +1,16 @@
 from django.conf.urls import url
 
-from addjob import views
+from . import views
 
-from addjob.lookups_autocomplete import  PlJobAutocomplete, EngJobAutocomplete, BranzaAutocomplete, TagsAutocomplete
+from .lookups_autocomplete import  PlJobAutocomplete, EngJobAutocomplete, BranzaAutocomplete, TagsAutocomplete
 
 urlpatterns = [
 
-    url(r'^lista_zawodow/', views.job_list, name='job_list'),
-    url(r'^dodaj_zawod/', views.add_job_form, name='add_job_form'),
-    url(r'^lista_branz/', views.branze_list, name='branze_list'),
-    url(r'^praca_w_branzy/(?P<branza_slug>[\w\-]+)/$', views.jobs_in_branza, name='job_in_branza'),
-    url(r'^job_details/(?P<job_slug>[\w\-]+)/$', views.job_details, name='job_details'),
+    url(r'^lista-zawodow/', views.job_list, name='job_list'),
+    url(r'^dodaj-zawod/', views.add_job_form, name='add_job_form'),
+    url(r'^lista-branz/', views.branze_list, name='branze_list'),
+    url(r'^praca-w-branzy/(?P<branza_slug>[\w\-]+)/$', views.jobs_in_branza, name='job_in_branza'),
+    url(r'^job-details/(?P<job_slug>[\w\-]+)/$', views.job_details, name='job_details'),
 
 ]
 
