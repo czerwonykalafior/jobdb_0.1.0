@@ -1,3 +1,6 @@
+{#TODO: autoscroll#}
+{#TODO: ajax refresh#}
+
 <!DOCTYPE html>
 
 {% load staticfiles %}
@@ -20,8 +23,8 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="shortcut icon" href="{% static 'jonaki-job-board-template/favicon.ico' %}" type="image/x-icon">
-    <link rel="icon" href="{% static 'jonaki-job-board-template/favicon.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'jonaki-job-board-template/img/logo.png' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'jonaki-job-board-template/img/logo.png' %}" type="image/x-icon">
 
     <link rel="stylesheet" href="{% static 'js/bower_components/bootstrap/dist/css/bootstrap.min.css'%}">
     <link rel="stylesheet" href="{% static 'jonaki-job-board-template/css/normalize.css' %}">
@@ -39,7 +42,6 @@
 
 </head>
 <body>
-
 <div id="preloader">
     <div >...</div>
 </div>
@@ -182,7 +184,7 @@
                 <div class="col-md-9">
                     <div class="job-posts table-responsive">
                         <table class="table">
-{#TODO: zobacz szczegóły #}
+{#TODO: tagi dzialaja? #}
                             {% for job in jobs %}
                                 <tr class="odd wow fadeInUp" data-wow-delay="{{ t }}+0.1">
                                     <td class="tbl-logo visible-lg"><img src="{% static 'jonaki-job-board-template/img/job-logo1.png' %}" alt=""></td>
@@ -264,6 +266,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-lg-3">
+                sjflkdsajfs
+
             </div>
             <div class="col-md-4">
                 <div class="single-footer">

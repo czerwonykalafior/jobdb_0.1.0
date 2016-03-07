@@ -44,6 +44,7 @@ class BranzaAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
+
 class TagsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !

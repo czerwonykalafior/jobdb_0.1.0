@@ -6,10 +6,11 @@ from django.shortcuts import render
 
 import simplejson as json
 from haystack.query import SearchQuerySet
+from rest_framework import generics
 
-from .models import Stanowisko, Branza, Tags
-from forms import StanowiskoForm
-
+from .serializers import BranzaSerializer
+from .models import Stanowisko, Branza
+from .forms import StanowiskoForm
 
 
 def index(request):
@@ -18,7 +19,7 @@ def index(request):
 
         form = StanowiskoForm(request.POST)
 
-        if  form.is_valid():
+        if form.is_valid():
             form.save()
             return render(request, 'addjob/thx.html')
         else:
@@ -26,10 +27,10 @@ def index(request):
     else:
         form = StanowiskoForm()
 
-    job_list = Stanowisko.objects.all()
-    job_number = job_list.count()
-    job_list = job_list.order_by('id').reverse()[:5]
-    context_dict = {'form': form, 'jobs': job_list, 'job_number': job_number}
+    job_lst = Stanowisko.objects.all()
+    job_number = job_lst.count()
+    job_lst = job_lst.order_by('id').reverse()[:5]
+    context_dict = {'form': form, 'jobs': job_lst, 'job_number': job_number}
 
     return render(request, 'addjob/base.html', context_dict)
 
@@ -40,7 +41,7 @@ def add_job_form(request):
 
         form = StanowiskoForm(request.POST)
 
-        if  form.is_valid():
+        if form.is_valid():
             form.save()
             return render(request, 'addjob/thx.html')
         else:
@@ -53,12 +54,11 @@ def add_job_form(request):
 
 def branze_list(request):
     try:
-        list = Branza.objects.all().order_by('name')
+        lst = Branza.objects.all().order_by('name')
     except Branza.DoesNotExist:
-        list = None
+        lst = None
 
-    return render(request, 'addjob/branze_list.html', {'list': list})
-
+    return render(request, 'addjob/branze_list.html', {'list': lst})
 
 
 def jobs_in_branza(request, branza_slug):
@@ -71,23 +71,22 @@ def jobs_in_branza(request, branza_slug):
     #             print("Either the entry or blog doesn't exist.")
     branza = Branza.objects.get(slug=branza_slug)
     try:
-        list = Stanowisko.objects.filter(Q(branza=branza.id) | Q(sektor=branza.id))
+        lst = Stanowisko.objects.filter(Q(branza=branza.id) | Q(sektor=branza.id))
     except Stanowisko.DoesNotExist:
-        list = None
-    context_dict = {'branza': branza, 'list': list}
+        lst = None
+    context_dict = {'branza': branza, 'list': lst}
     return render(request, 'addjob/jobs_in_branza.html', context_dict)
 
 
 def job_list(request):
     try:
-        list = Stanowisko.objects.all().order_by('pl_job')
+        lst = Stanowisko.objects.all().order_by('pl_job')
     except Stanowisko.DoesNotExist:
-        list = None
-    return render(request, 'addjob/job_list.html', {'list': list} )
+        lst = None
+    return render(request, 'addjob/job_list.html', {'list': lst})
 
 
 def job_details(request, job_slug):
-    job = []
     try:
         job = Stanowisko.objects.get(slug=job_slug)
     except Stanowisko.DoesNotExist:
@@ -115,3 +114,22 @@ def autocomplete(request):
         'results': suggestions
     })
     return HttpResponse(the_data, content_type='application/json')
+
+# class JSONResponse(HttpResponse):
+#     """
+#     An HttpResponse that renders its content into JSON.
+#     """
+#     def __init__(self, data, **kwargs):
+#         content = JSONRenderer().render(data)
+#         kwargs['content_type'] = 'application/json'
+#         super(JSONResponse, self).__init__(content, **kwargs)
+
+# TODO: Rest API
+class BranzaList(generics.ListCreateAPIView):
+    queryset = Branza.objects.all()
+    serializer_class = BranzaSerializer
+
+
+class BranzaDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Branza.objects.all()
+    serializer_class = BranzaSerializer

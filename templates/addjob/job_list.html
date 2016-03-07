@@ -49,21 +49,5 @@
 
     </div>
 
-
-        {% for job in list  %}
-            <div class="content-area container">
-                <a href="{% url 'job_details' job.slug %}"><h2>
-                    {{ job|upper }}</h2>
-                </a>
-                <p>
-
-                    branża: <a href="{% url 'job_in_branza' job.branza.slug %}">{{ job.branza }}</a>;
-                    sektor: <a href="{% url 'job_in_branza' job.branza.slug %}">{{ job.sektor }}</a>
-                </p>
-                <p>tags: {{ job.tags.all|join:", " }}</p>
-            <hr>
-            </div>
-        {% endfor %}
-
 </div>
 {% endblock %}

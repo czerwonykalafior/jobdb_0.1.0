@@ -1,8 +1,9 @@
 from django.conf.urls import url
 
-from . import views
+from rest_framework.urlpatterns import format_suffix_patterns
 
-from .lookups_autocomplete import  PlJobAutocomplete, EngJobAutocomplete, BranzaAutocomplete, TagsAutocomplete
+from . import views
+from .lookups_autocomplete import PlJobAutocomplete, EngJobAutocomplete, BranzaAutocomplete, TagsAutocomplete
 
 urlpatterns = [
 
@@ -23,3 +24,12 @@ urlpatterns += [
     url('tags-autocomplete/$', TagsAutocomplete.as_view(), name='tags-autocomplete', ),
 
 ]
+
+# api
+
+urlpatterns += [
+    url(r'^b/$', views.BranzaList.as_view()),
+    url(r'^b/$', views.BranzaList.as_view()),
+]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
