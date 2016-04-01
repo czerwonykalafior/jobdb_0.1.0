@@ -1,7 +1,10 @@
 from django.conf.urls import url
+from django.views import generic
 
 from rest_framework.urlpatterns import format_suffix_patterns
 
+from addjob.forms import StanowiskoForm
+from addjob.models import PlJob, Tags
 from . import views
 from .lookups_autocomplete import PlJobAutocomplete, EngJobAutocomplete, BranzaAutocomplete, TagsAutocomplete
 
@@ -18,10 +21,10 @@ urlpatterns = [
 # autocomplete urls
 urlpatterns += [
 
-    url('pljob-autocomplete/$', PlJobAutocomplete.as_view(), name='pl_job-autocomplete', ),
-    url('engjob-autocomplete/$', EngJobAutocomplete.as_view(), name='eng_job-autocomplete', ),
-    url('branza-autocomplete/$', BranzaAutocomplete.as_view(), name='branza-autocomplete', ),
-    url('tags-autocomplete/$', TagsAutocomplete.as_view(), name='tags-autocomplete', ),
+    url('pljob-autocomplete/$', PlJobAutocomplete.as_view(model=PlJob, create_field='name'), name='pl_job-autocomplete', ),
+    url(r'^engjob-autocomplete/$', EngJobAutocomplete.as_view(create_field='name'), name='eng_job-autocomplete', ),
+    url(r'^branza-autocomplete/$', BranzaAutocomplete.as_view(), name='branza-autocomplete', ),
+    url(r'^tags-autocomplete/$', TagsAutocomplete.as_view(model=Tags, create_field='name'), name='tags-autocomplete', ),
 
 ]
 
