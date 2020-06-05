@@ -8,7 +8,7 @@ compizconfig-python==0.9.11.3
 debtagshw==0.1
 defer==1.0.6
 dirspec==13.10
-Django==1.9.4
+Django==1.11.29
 -e git+https://github.com/django-haystack/django-haystack.git@5168abe6ac5e191cb5ce0215f0242c75e13d0f60#egg=django_haystack
 duplicity==0.6.23
 f.lux-indicator-applet==1.1.8
